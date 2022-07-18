@@ -47,7 +47,7 @@ dotenv.config({ path: "../.env" });
 dayjs_1.default.extend(relativeTime_1.default);
 const cors = require("cors");
 const app = (0, express_1.default)();
-const port = 3000;
+const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
@@ -180,17 +180,23 @@ app.post("/add-comment", (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 }));
 app.post("/upvote-comment", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { commentId } = req.body;
-    const { upvotes } = (yield getComment(commentId));
-    const hasUpvote = upvotes.some((id) => id === sessionUser.id.toString());
-    if (!hasUpvote) {
-        yield upvoteComment(commentId);
+    try {
+        const { commentId } = req.body;
+        const { upvotes } = (yield getComment(commentId));
+        const hasUpvote = upvotes.some((id) => id === sessionUser.id.toString());
+        if (!hasUpvote) {
+            yield upvoteComment(commentId);
+        }
+        else {
+            yield removeCommentUpvote(commentId);
+        }
+        io.sockets.emit("comment:upvote");
+        res.send("success");
     }
-    else {
-        yield removeCommentUpvote(commentId);
+    catch (e) {
+        console.log("Failed to upvote comment", e);
+        res.send("Failed to upvote comment");
     }
-    io.sockets.emit("comment:upvote");
-    res.send("success");
 }));
 app.post("/reset", (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
