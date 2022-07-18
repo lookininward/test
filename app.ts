@@ -275,4 +275,4 @@ app.post("/reset", async (_: express.Request, res: express.Response) => {
   }
 });
 
-httpServer.listen(port);
+httpServer.listen(process.env.PORT);
