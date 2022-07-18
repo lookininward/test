@@ -70,6 +70,8 @@ const handleDisconnect = () => {
   });
 };
 
+handleDisconnect();
+
 const sessionUser = demo.USERS[0];
 
 const clearComments = () =>

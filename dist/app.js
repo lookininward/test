@@ -92,6 +92,7 @@ const handleDisconnect = () => {
         }
     });
 };
+handleDisconnect();
 const sessionUser = demo_1.default.USERS[0];
 const clearComments = () => new Promise((resolve) => connection.query(`DELETE FROM comments`, (_, result) => resolve(result)));
 const getSessionUser = () => new Promise((resolve) => connection.query(`SELECT * FROM users WHERE id = ${sessionUser.id}`, (_, result) => resolve(result[0])));
