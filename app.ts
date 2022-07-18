@@ -243,20 +243,24 @@ app.post(
 app.post(
   "/upvote-comment",
   async (req: express.Request, res: express.Response) => {
-    const { commentId } = req.body;
-    const { upvotes } = (await getComment(commentId)) as SQLCommentType;
-    const hasUpvote = upvotes.some(
-      (id: string) => id === sessionUser.id.toString()
-    );
+    try {
+      const { commentId } = req.body;
+      const { upvotes } = (await getComment(commentId)) as SQLCommentType;
+      const hasUpvote = upvotes.some(
+        (id: string) => id === sessionUser.id.toString()
+      );
 
-    if (!hasUpvote) {
-      await upvoteComment(commentId);
-    } else {
-      await removeCommentUpvote(commentId);
+      if (!hasUpvote) {
+        await upvoteComment(commentId);
+      } else {
+        await removeCommentUpvote(commentId);
+      }
+      io.sockets.emit("comment:upvote");
+      res.send("success");
+    } catch (e) {
+      console.log("Failed to upvote comment", e);
+      res.send("Failed to upvote comment");
     }
-
-    io.sockets.emit("comment:upvote");
-    res.send("success");
   }
 );
 
