@@ -38,10 +38,10 @@ io.on("connection", (socket: Socket) => {
 });
 
 const db_config = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
+  host: "remotemysql.com",
+  user: "zsaYTyLVvv",
+  password: "XnjTzG7bE6",
+  database: "zsaYTyLVvv",
 };
 
 let connection = mysql.createConnection(db_config);
