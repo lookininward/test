@@ -47,7 +47,7 @@ dotenv.config({ path: "../.env" });
 dayjs_1.default.extend(relativeTime_1.default);
 const cors = require("cors");
 const app = (0, express_1.default)();
-const port = process.env.PORT || 3000;
+const port = 3000;
 app.use(cors());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
