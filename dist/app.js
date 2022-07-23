@@ -238,7 +238,7 @@ app.post("/reset", (_, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.send("Failed to reset db");
     }
 }));
-httpServer.listen(port, "localhost", function () {
+httpServer.listen(port, "http://ec2-44-202-219-205.compute-1.amazonaws.com", function () {
     console.log("Express started on http://localhost:" +
         port +
         "; press Ctrl-C to terminate.");
