@@ -48,7 +48,9 @@ dayjs_1.default.extend(relativeTime_1.default);
 const cors = require("cors");
 const app = (0, express_1.default)();
 const port = 3000;
-app.use(cors());
+app.use(cors({
+    origin: "*",
+}));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 const httpServer = (0, http_1.createServer)(app);
