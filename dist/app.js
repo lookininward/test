@@ -238,4 +238,8 @@ app.post("/reset", (_, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.send("Failed to reset db");
     }
 }));
-httpServer.listen(port);
+httpServer.listen(port, "localhost", function () {
+    console.log("Express started on http://localhost:" +
+        port +
+        "; press Ctrl-C to terminate.");
+});

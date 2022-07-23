@@ -307,4 +307,10 @@ app.post("/reset", async (_: express.Request, res: express.Response) => {
   }
 });
 
-httpServer.listen(port);
+httpServer.listen(port, "localhost", function () {
+  console.log(
+    "Express started on http://localhost:" +
+      port +
+      "; press Ctrl-C to terminate."
+  );
+});
